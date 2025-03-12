@@ -83,23 +83,23 @@ if submit_button:
     # Species descriptions
     species_info = {
     'Iris-setosa': """
-    Petals: Small and consistently sized, with petals not exceeding the base of the sepals.
-    Sepals: Relatively smaller compared to versicolor and virginica.
+    It has small and consistently sized, with petals not exceeding the base of the sepals.
+    The sepals are relatively smaller compared to versicolor and virginica.
+    
     Distribution: Found in arctic and coastal regions.
     Common name: Beachhead Iris
     """,
     
     'Iris-versicolor': """
-    Petals: Moderate in size, falling between setosa and virginica.
-    Sepals: Moderate in size, falling between setosa and virginica.
+    Both sepals and petals are moderate in size, falling between setosa and virginica.
+    
     Distribution: Found in wetlands and marshy areas of eastern and central North America.
     Common names: Blue Flag, Harlequin Blue Flag, Larger Blue Flag, Northern Blue Flag
     """,
     
     'Iris-virginica': """
-    Petals: Generally larger than setosa and versicolor, with notable variability in petal and sepal measurements.
-    Sepals: Larger than setosa and versicolor.
-    Flower stalk: Weaker and often falls over while in flower.
+    It has generally larger petals and sepals than setosa and versicolor, with notable variability in petal and sepal measurements.
+    
     Distribution: Found in wetlands, marshy areas, and along river and lake shores of eastern North America.
     Common name: Southern Blue Flag Iris
     """
