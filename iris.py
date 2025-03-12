@@ -12,7 +12,7 @@ st.set_page_config(page_title="Iris Flower Classifier", page_icon="🌺", layout
 st.title("🌺 Iris Flower Classifier")
 st.subheader("Predict the species of Iris flowers based on their measurements.")
 
-# Add a background image or color for style (optional)
+# Enhanced CSS styling
 st.markdown("""
     <style>
     .reportview-container {
@@ -35,54 +35,52 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Add an introduction with a nice font
+# Introduction text
 st.markdown("""
     <div style="font-size:18px; color: #5c6bc0; font-weight: bold;">
-        Enter the flower measurements below, and we’ll predict the species for you!
+        Enter the flower measurements and we’ll predict the species for you!
     </div>
 """, unsafe_allow_html=True)
 
-# Create a more organized input form
+# Organized input form
 with st.form(key='flower_form'):
     st.write("Please enter the measurements of the flower:")
 
-    # Input fields for features with default values
     sepal_length = st.number_input("Sepal Length (cm)", min_value=0.0, max_value=10.0, value=5.1, step=0.1)
     sepal_width = st.number_input("Sepal Width (cm)", min_value=0.0, max_value=10.0, value=3.5, step=0.1)
     petal_length = st.number_input("Petal Length (cm)", min_value=0.0, max_value=10.0, value=1.4, step=0.1)
     petal_width = st.number_input("Petal Width (cm)", min_value=0.0, max_value=10.0, value=0.2, step=0.1)
 
-    # Add a submit button inside the form
     submit_button = st.form_submit_button(label='Predict')
 
 # Handling the prediction logic and displaying the result
 if submit_button:
     input_data = np.array([[sepal_length, sepal_width, petal_length, petal_width]])
+    predicted_class = model.predict(input_data)[0].strip().capitalize()
 
-    # Make a prediction
-    predicted_class = model.predict(input_data)[0]
-
-    # Display the prediction result with enhanced styling
+    # Display the prediction result
     st.markdown(f"""
     <div style="font-size: 22px; font-weight: bold; color: #4CAF50;">
         **Predicted Species:** {predicted_class}
     </div>
     """, unsafe_allow_html=True)
 
-    # Display an image of the flower species
+    # Dictionary of images for each species
     species_images = {
         'Setosa': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Iris_setosa_3.jpg/800px-Iris_setosa_3.jpg',
         'Versicolor': 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Iris_versicolor_4.jpg/800px-Iris_versicolor_4.jpg',
         'Virginica': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Iris_virginica_1.jpg/800px-Iris_virginica_1.jpg'
     }
     
-    # Display image based on the predicted species
-    st.image(species_images[predicted_class], width=300)
+    if predicted_class in species_images:
+        st.image(species_images[predicted_class], width=300)
+    else:
+        st.error("Species image not found!")
 
-    # Additional helpful message with bold styling
-    st.info(f"Note: The model classifies based on common Iris species, such as **Setosa**, **Versicolor**, and **Virginica**.")
+    # Additional helpful message
+    st.info("Note: The model classifies based on common Iris species: **Setosa, Versicolor, and Virginica**.")
     
-    # Display a brief description of the species
+    # Species descriptions
     species_info = {
         'Setosa': "Setosa is characterized by small flowers with shorter petals.",
         'Versicolor': "Versicolor has medium-sized flowers with moderate petal length.",
@@ -90,15 +88,15 @@ if submit_button:
     }
     
     st.markdown(f"### About **{predicted_class}**:")
-    st.write(species_info[predicted_class])
+    st.write(species_info.get(predicted_class, "No description available."))
 
-    # Add a section for user feedback
+    # User feedback section
     st.markdown("### Feedback")
     feedback = st.radio("Was this prediction helpful?", ['👍 Yes', '👎 No'])
     comments = st.text_area("Any suggestions or comments?")
     
     if st.button('Submit Feedback'):
-        st.write(f"Thank you for your feedback! You rated this: {feedback}")
+        st.success("Thank you for your feedback! 🎉")
+        st.write(f"You rated this: {feedback}")
         if comments:
             st.write(f"Your comments: {comments}")
-            
