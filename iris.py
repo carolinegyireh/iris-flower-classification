@@ -5,7 +5,7 @@ import joblib
 # Load the trained model
 model = joblib.load("iris_classifier.pkl")
 
-# Customizing the title and layout
+# title and layout
 st.set_page_config(page_title="Iris Flower Classifier", page_icon="🌺", layout="centered")
 
 # Add a header with a nice description
@@ -82,11 +82,29 @@ if submit_button:
     
     # Species descriptions
     species_info = {
-        'Setosa': "Setosa is characterized by small flowers with shorter petals.",
-        'Versicolor': "Versicolor has medium-sized flowers with moderate petal length.",
-        'Virginica': "Virginica features large flowers with long petals."
-    }
+    'Iris-setosa': """
+    Petals: Small and consistently sized, with petals not exceeding the base of the sepals.
+    Sepals: Relatively smaller compared to versicolor and virginica.
+    Distribution: Found in arctic and coastal regions.
+    Common name: Beachhead Iris
+    """,
     
+    'Iris-versicolor': """
+    Petals: Moderate in size, falling between setosa and virginica.
+    Sepals: Moderate in size, falling between setosa and virginica.
+    Distribution: Found in wetlands and marshy areas of eastern and central North America.
+    Common names: Blue Flag, Harlequin Blue Flag, Larger Blue Flag, Northern Blue Flag
+    """,
+    
+    'Iris-virginica': """
+    Petals: Generally larger than setosa and versicolor, with notable variability in petal and sepal measurements.
+    Sepals: Larger than setosa and versicolor.
+    Flower stalk: Weaker and often falls over while in flower.
+    Distribution: Found in wetlands, marshy areas, and along river and lake shores of eastern North America.
+    Common name: Southern Blue Flag Iris
+    """
+}
+
     st.markdown(f"### About {predicted_class}:")
     st.write(species_info.get(predicted_class, "No description available."))
 
