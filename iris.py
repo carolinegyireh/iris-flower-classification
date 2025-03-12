@@ -61,7 +61,7 @@ if submit_button:
     # Display the prediction result
     st.markdown(f"""
     <div style="font-size: 22px; font-weight: bold; color: #4CAF50;">
-        **Predicted Species:** {predicted_class}
+        Predicted Species: {predicted_class}
     </div>
     """, unsafe_allow_html=True)
 
