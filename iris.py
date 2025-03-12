@@ -18,7 +18,28 @@ st.markdown("""
     .reportview-container {
         background-color: #f4f7fa;
     }
+    .css-18e3b6p {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .stButton>button {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 10px;
+        padding: 10px;
+    }
     </style>
+""", unsafe_allow_html=True)
+
+# Add an introduction with a nice font
+st.markdown("""
+    <div style="font-size:18px; color: #5c6bc0; font-weight: bold;">
+        Enter the flower measurements below, and we’ll predict the species for you!
+    </div>
 """, unsafe_allow_html=True)
 
 # Create a more organized input form
@@ -43,10 +64,41 @@ if submit_button:
 
     # Display the prediction result with enhanced styling
     st.markdown(f"""
-    <div style="font-size: 20px; font-weight: bold; color: #4CAF50;">
-        Predicted Species: <span style="font-size: 22px;">{predicted_class}</span>
+    <div style="font-size: 22px; font-weight: bold; color: #4CAF50;">
+        **Predicted Species:** {predicted_class}
     </div>
     """, unsafe_allow_html=True)
 
-    # Additional helpful message
-    st.info("Note: The model classifies based on common Iris species, such as Setosa, Versicolor, and Virginica.")
+    # Display an image of the flower species
+    species_images = {
+        'Setosa': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Iris_setosa_3.jpg/800px-Iris_setosa_3.jpg',
+        'Versicolor': 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Iris_versicolor_4.jpg/800px-Iris_versicolor_4.jpg',
+        'Virginica': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Iris_virginica_1.jpg/800px-Iris_virginica_1.jpg'
+    }
+    
+    # Display image based on the predicted species
+    st.image(species_images[predicted_class], width=300)
+
+    # Additional helpful message with bold styling
+    st.info(f"Note: The model classifies based on common Iris species, such as **Setosa**, **Versicolor**, and **Virginica**.")
+    
+    # Display a brief description of the species
+    species_info = {
+        'Setosa': "Setosa is characterized by small flowers with shorter petals.",
+        'Versicolor': "Versicolor has medium-sized flowers with moderate petal length.",
+        'Virginica': "Virginica features large flowers with long petals."
+    }
+    
+    st.markdown(f"### About **{predicted_class}**:")
+    st.write(species_info[predicted_class])
+
+    # Add a section for user feedback
+    st.markdown("### Feedback")
+    feedback = st.radio("Was this prediction helpful?", ['👍 Yes', '👎 No'])
+    comments = st.text_area("Any suggestions or comments?")
+    
+    if st.button('Submit Feedback'):
+        st.write(f"Thank you for your feedback! You rated this: {feedback}")
+        if comments:
+            st.write(f"Your comments: {comments}")
+            
