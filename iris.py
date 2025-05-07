@@ -8,11 +8,11 @@ model = joblib.load("iris_classifier.pkl")
 # title and layout
 st.set_page_config(page_title="Iris Flower Classifier", page_icon="🌺", layout="centered")
 
-# Add a header with a nice description
+# Header
 st.title("🌺 Iris Flower Classifier")
 st.subheader("Predict the species of Iris flowers based on their measurements.")
 
-# Enhanced CSS styling
+# CSS styling
 st.markdown("""
     <style>
     .reportview-container {
@@ -42,7 +42,7 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-# Organized input form
+# Input form
 with st.form(key='flower_form'):
     st.write("Please enter the measurements of the flower:")
 
@@ -53,7 +53,7 @@ with st.form(key='flower_form'):
 
     submit_button = st.form_submit_button(label='Predict')
 
-# Handling the prediction logic and displaying the result
+# Prediction logic
 if submit_button:
     input_data = np.array([[sepal_length, sepal_width, petal_length, petal_width]])
     predicted_class = model.predict(input_data)[0].strip().capitalize()
@@ -65,7 +65,7 @@ if submit_button:
     </div>
     """, unsafe_allow_html=True)
 
-    # Dictionary of images for each species
+    # Images for each species from wikipedia
     species_images = {
         'Iris-setosa': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Irissetosa1.jpg/220px-Irissetosa1.jpg',
         'Iris-versicolor': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Blue_Flag%2C_Ottawa.jpg/220px-Blue_Flag%2C_Ottawa.jpg',
@@ -77,7 +77,7 @@ if submit_button:
     else:
         st.error("Species image not found!")
 
-    # A model message
+    # Model message
     st.info("Side Note: The model classifies based on common Iris species: **Setosa, Versicolor, and Virginica**.")
     
     # Species descriptions
